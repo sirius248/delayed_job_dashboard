@@ -1,0 +1,23 @@
+{
+  "name": "delayed_job_dashboard",
+  "version": "1.0.0",
+  "description": "Delayed::Job Realtime Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack --progress"
+  },
+  "author": "Long Nguyen",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "css-loader": "^0.28.0",
+    "vue-loader": "^11.3.4",
+    "vue-template-compiler": "^2.2.6",
+    "webpack": "^2.3.3"
+  },
+  "dependencies": {
+    "vue": "^2.2.6"
+  }
+}

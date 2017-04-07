@@ -13,9 +13,9 @@ module DelayedJobDashboard
 
     get '/overview' do
       if defined?(Delayed::Job)
-        haml :overview, format: :html5
+        haml :overview, escape_html: false
       else
-        @message = "Unable to connected to Delayed::Job database"
+        @message = "Delayed::Job is not available"
         haml :error
       end
     end
