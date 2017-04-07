@@ -8,9 +8,12 @@ module.exports = {
       {
         test: /\.js?$/,
         loader: "babel-loader",
-        options: {
-          presets: ["es2015"]
-        }
+        exclude: /node_modules/
+      },
+
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
       }
     ]
   }
