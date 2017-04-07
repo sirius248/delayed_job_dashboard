@@ -4,7 +4,7 @@
   "description": "Delayed::Job Realtime Dashboard",
   "main": "app.js",
   "scripts": {
-    "build": "webpack --progress"
+    "build": "webpack --progress --watch"
   },
   "author": "Long Nguyen",
   "license": "ISC",
