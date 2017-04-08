@@ -23,7 +23,11 @@ module DelayedJobDashboard
     get '/jobs.json' do
       content_type :json
       @jobs = Delayed::Job.all
-      @jobs.to_json
+      @jobs_json = @jobs.as_json
+      @jobs_json.each_with_index do |job, index|
+        job["payload_object"] = @jobs[index].payload_object
+      end
+      @jobs_json.to_json
     end
   end
 end

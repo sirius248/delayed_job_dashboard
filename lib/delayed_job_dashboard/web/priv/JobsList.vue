@@ -8,7 +8,7 @@
         label="Job ID">
       </el-table-column>
       <el-table-column
-        prop="handler"
+        prop="payload_object"
         label="Handler"
         :formatter="formatter"
         width="400">
@@ -38,18 +38,17 @@
         label="Actions"
         width="120">
         <template scope="scope">
-          <el-button type="info" size="small" @click="dialogVisible = true">
+          <el-button type="info" size="mini" @click.native.prevent="handleClickDialog(scope.$index, jobs)">
             Show
           </el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog title="Tips" v-model="dialogVisible" size="tiny">
-      <span>This is a message</span>
+    <el-dialog title="Object Payload" v-model="dialogVisible" size="small">
+      <pre>{{jobDetailHandler}}</pre>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+        <el-button type="primary" @click="dialogVisible = false">Ok!</el-button>
       </span>
     </el-dialog>
   </div>
@@ -57,17 +56,27 @@
 
 <script>
   const moment = require('moment');
+  const YAML = require('js-yaml');
+
   export default {
     data () {
       return {
         jobs: [],
-        dialogVisible: false
+        dialogVisible: false,
+        jobDetailHandler: "",
+        jobDetailId: ""
       }
     },
     created () {
       this.loadJobs()
     },
     methods: {
+      handleClickDialog(index, jobs){
+        this.jobDetailHandler = jobs[index].payload_object;
+        this.jobDetailId = jobs[index].id;
+        this.dialogVisible = true;
+      },
+
       formatter(row, column){
         return row.handler.substring(0,300)
       },
@@ -81,7 +90,7 @@
       },
 
       loadJobs() {
-        this.$http.get("/blah/jobs.json").then(response => {
+        this.$http.get("/delayed_job/jobs.json").then(response => {
           this.jobs = response.body;
         }, response => {
         });
