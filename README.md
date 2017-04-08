@@ -1,8 +1,8 @@
-# DelayedJobDashboard
+# DelayedJobDashboard (Under development)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/delayed_job_dashboard`. To experiment with that code, run `bin/console` for an interactive prompt.
+![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24827325/64b81228-1c71-11e7-980a-a83154f1cd7c.png)
 
-TODO: Delete this and the text above, and describe your gem
+![screenshot2](https://cloud.githubusercontent.com/assets/2282642/24827327/6750c5ac-1c71-11e7-9202-f33328b5610a.png)
 
 ## Installation
 
@@ -38,4 +38,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
