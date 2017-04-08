@@ -19,5 +19,20 @@ module DelayedJobDashboard
         haml :error
       end
     end
+
+    get '/jobs.json' do
+      content_type :json
+      @jobs = Delayed::Job.all.map do |job|
+        {
+          handler: job.handler.truncate(200),
+          priority: job.priority,
+          attempts: job.attempts,
+          run_at: job.run_at,
+          locked_at: job.locked_at,
+          created_at: job.created_at
+        }
+      end
+      @jobs.to_json
+    end
   end
 end
