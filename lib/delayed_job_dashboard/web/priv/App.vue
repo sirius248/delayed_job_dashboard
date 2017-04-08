@@ -23,7 +23,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Workers Dashboard',
+      msg: 'Dashboard',
       activeIndex: '1'
     }
   },
