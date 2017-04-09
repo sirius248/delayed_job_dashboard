@@ -2,10 +2,18 @@
   <div>
     <el-table
       :data="jobs"
+      v-loading.body="loading"
       style="width: 100%">
       <el-table-column
         prop="id"
         label="Job ID">
+      </el-table-column>
+      <el-table-column
+        label="Status">
+        <template scope="scope">
+          <el-tag
+            :type="filterTag(scope.row)">{{filterTagName(scope.row)}}</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         prop="payload_object"
@@ -34,7 +42,6 @@
       </el-table-column>
 
       <el-table-column
-        fixed="right"
         label="Actions"
         width="120">
         <template scope="scope">
@@ -56,20 +63,35 @@
 
 <script>
   const moment = require('moment');
-  const YAML = require('js-yaml');
 
   export default {
+    props: ["mydata"],
     data () {
       return {
         jobs: [],
         dialogVisible: false,
         jobDetailHandler: "",
-        jobDetailId: ""
+        jobDetailId: "",
+        loading: true
+
       }
     },
     created () {
-      this.loadJobs()
+      let path = window.location.pathname;
+      if (path.includes("pending")) {
+        this.loadJobs({ params: { filter: "pending" } });
+      } else if (path.includes("failed")) {
+        this.loadJobs({ params: { filter: "failed" } });
+      } else if (path.includes("working")) {
+        this.loadJobs({ params: { filter: "working" } });
+      } else if (path.includes("enqueued")) {
+        this.loadJobs({ params: { filter: "enqueued" } });
+      }
+      else {
+        this.loadJobs({ params: {} });
+      }
     },
+
     methods: {
       handleClickDialog(index, jobs){
         this.jobDetailHandler = jobs[index].payload_object;
@@ -81,6 +103,26 @@
         return row.handler.substring(0,300)
       },
 
+      filterTag(row){
+        if (row.failed_at !== null) {
+          return "danger"
+        } else if (row.locked_at !== null) {
+          return "warning"
+        } else {
+          return "gray"
+        }
+      },
+
+      filterTagName(row) {
+        if (row.failed_at !== null) {
+          return "Failed"
+        } else if (row.locked_at !== null) {
+          return "Running"
+        } else {
+          return "Queued"
+        }
+      },
+
       runAtFormatter(row, column){
         return moment(row.run_at).format('MMMM Do YYYY, h:mm:ss a');
       },
@@ -89,10 +131,12 @@
         return moment(row.created_at).format('MMMM Do YYYY, h:mm:ss a');
       },
 
-      loadJobs() {
-        this.$http.get("/delayed_job/jobs.json").then(response => {
+      loadJobs(queries) {
+        this.$http.get("/delayed_job/jobs.json", queries).then(response => {
           this.jobs = response.body;
+          this.loading = false;
         }, response => {
+          this.loading = false;
         });
       }
     }

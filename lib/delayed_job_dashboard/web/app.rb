@@ -8,7 +8,7 @@ module DelayedJobDashboard
     set :views, File.expand_path('../views', __FILE__)
 
     get "/" do
-      "Hello Sinatra World"
+      redirect "/delayed_job/overview"
     end
 
     get '/overview' do
@@ -20,9 +20,38 @@ module DelayedJobDashboard
       end
     end
 
+    get '/enqueued' do
+      haml :enqueued, escape_html: false
+    end
+
+    get '/pending' do
+      haml :pending, escape_html: false
+    end
+
+    get '/failed' do
+      haml :failed, escape_html: false
+    end
+
+    get '/working' do
+      haml :working, escape_html: false
+    end
+
     get '/jobs.json' do
       content_type :json
-      @jobs = Delayed::Job.all
+
+      case params["filter"]
+      when "pending"
+        @jobs = Delayed::Job.where(locked_at: nil, attempts: 0).order(created_at: :desc)
+      when "failed"
+        @jobs = Delayed::Job.where.not(failed_at: nil).order(created_at: :desc)
+      when "working"
+        @jobs = Delayed::Job.where.not(locked_at: nil).order(created_at: :desc)
+      when "enqueued"
+        @jobs = Delayed::Job.order(created_at: :desc)
+      end
+
+      @jobs = Delayed::Job.order(created_at: :desc) if @jobs.nil?
+
       @jobs_json = @jobs.as_json
       @jobs_json.each_with_index do |job, index|
         job["payload_object"] = @jobs[index].payload_object
