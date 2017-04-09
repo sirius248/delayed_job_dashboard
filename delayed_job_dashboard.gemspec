@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["long.polyglot@gmail.com"]
 
   spec.summary       = %q{Modern DelayedJob Dashboard}
-  spec.description   = %q{Modern DelayedJob Dashboard}
+  spec.description   = %q{Modern DelayedJob Dashboard built with VueJS and Sinatra.}
   spec.homepage      = "https://github.com/kimquy/delayed_job_dashboard"
   spec.license       = "MIT"
 
