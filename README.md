@@ -1,8 +1,8 @@
 # DelayedJobDashboard (Under development)
 
-![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24827325/64b81228-1c71-11e7-980a-a83154f1cd7c.png)
+![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24837740/2de53704-1d65-11e7-89dc-8d8fe85e093f.png)
 
-![screenshot2](https://cloud.githubusercontent.com/assets/2282642/24827327/6750c5ac-1c71-11e7-9202-f33328b5610a.png)
+![screenshot2](https://cloud.githubusercontent.com/assets/2282642/24837741/309915e2-1d65-11e7-92fa-239a729709f7.png)
 
 ## Installation
 
