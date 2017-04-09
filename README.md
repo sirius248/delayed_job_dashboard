@@ -33,6 +33,7 @@ mount VueDelayedJobDashboard::WebApplication => '/delayed_job'
 - Add unit tests
 - Add pagination
 - Stats
+- Add authentication
 
 ## Development
 
