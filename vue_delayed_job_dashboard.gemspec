@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files         = Dir['{lib}/**/*', 'CONTRIBUTING.md', 'LICENSE', 'Rakefile', 'README.md']
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.12"
