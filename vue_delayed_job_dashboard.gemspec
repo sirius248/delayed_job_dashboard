@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'delayed_job_dashboard/version'
+require 'vue_delayed_job_dashboard/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "vue_delayed_job_dashboard"
-  spec.version       = DelayedJobDashboard::VERSION
+  spec.version       = VueDelayedJobDashboard::VERSION
   spec.authors       = ["Long Nguyen"]
   spec.email         = ["long.polyglot@gmail.com"]
 
@@ -14,7 +14,6 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/kimquy/delayed_job_dashboard"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]

@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-module DelayedJobDashboard
+module VueDelayedJobDashboard
   class WebApplication < Sinatra::Base
     set :root, File.dirname(__FILE__)
     set :static, true

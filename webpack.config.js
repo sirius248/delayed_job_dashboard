@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './lib/delayed_job_dashboard/web/priv/app.js',
+  entry: './lib/vue_delayed_job_dashboard/web/priv/app.js',
   output: {
-    filename: './lib/delayed_job_dashboard/web/public/bundle.js'
+    filename: './lib/vue_delayed_job_dashboard/web/public/bundle.js'
   },
   module: {
     rules: [
