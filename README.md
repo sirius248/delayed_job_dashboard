@@ -1,4 +1,4 @@
-# DelayedJobDashboard (Under development)
+# Vue Delayed Job Dashboard
 
 ![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24837740/2de53704-1d65-11e7-89dc-8d8fe85e093f.png)
 
@@ -22,7 +22,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the following line to top of `route.rb`
+
+```ruby
+mount DelayedJobDashboard::WebApplication => '/delayed_job'
+```
 
 ## Development
 
