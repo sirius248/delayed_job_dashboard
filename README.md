@@ -9,7 +9,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'delayed_job_dashboard'
+gem 'vue_delayed_job_dashboard'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install delayed_job_dashboard
+    $ gem install vue_delayed_job_dashboard
 
 ## Usage
 

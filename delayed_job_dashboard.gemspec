@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'delayed_job_dashboard/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "delayed_job_dashboard"
+  spec.name          = "vue_delayed_job_dashboard"
   spec.version       = DelayedJobDashboard::VERSION
   spec.authors       = ["Long Nguyen"]
   spec.email         = ["long.polyglot@gmail.com"]

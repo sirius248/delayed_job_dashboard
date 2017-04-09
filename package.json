@@ -1,5 +1,5 @@
 {
-  "name": "delayed_job_dashboard",
+  "name": "vue_delayed_job_dashboard",
   "version": "1.0.0",
   "description": "Delayed::Job Realtime Dashboard",
   "main": "app.js",
