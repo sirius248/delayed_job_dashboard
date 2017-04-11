@@ -1,8 +1,10 @@
 # Vue Delayed Job Dashboard
 
-![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24837740/2de53704-1d65-11e7-89dc-8d8fe85e093f.png)
+![screenshot0](https://cloud.githubusercontent.com/assets/2282642/24899863/0bad5384-1ecc-11e7-9729-9c2939f3fdae.png)
 
-![screenshot2](https://cloud.githubusercontent.com/assets/2282642/24837741/309915e2-1d65-11e7-92fa-239a729709f7.png)
+![screenshot1](https://cloud.githubusercontent.com/assets/2282642/24899673/52d7ad8c-1ecb-11e7-84bc-a59f3f8779a2.png)
+
+![screenshot2](https://cloud.githubusercontent.com/assets/2282642/24899676/545b18ec-1ecb-11e7-9505-76977ef51379.png)
 
 ## Installation
 
