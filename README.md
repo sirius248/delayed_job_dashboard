@@ -38,9 +38,10 @@ ENV["VUE_DELAYED_JOB_PASSWORD"] = "password"
 ## TODO
 
 - Add unit tests
-- Add pagination
-- Stats
+- Add pagination [DONE]
+- Stats [DONE]
 - Add authentication [DONE]
+- Add search box
 
 ## Development
 
@@ -50,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vue_delayed_job_dashboard. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kimquy/vue_delayed_job_dashboard. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
