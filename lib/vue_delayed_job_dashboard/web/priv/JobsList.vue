@@ -95,10 +95,10 @@
         jobDetailId: "",
         loading: true,
         currentPage: 0,
-        perPage: 4,
+        perPage: 10,
         totalJobs: 0,
         totalPages: 0,
-        pageSizes: [4, 6, 8, 10]
+        pageSizes: [10, 20, 30, 50]
       }
     },
 
