@@ -28,12 +28,19 @@ Add the following line to top of `route.rb`
 mount VueDelayedJobDashboard::WebApplication => '/delayed_job'
 ```
 
+vue_delayed_job_dashboard will require basic authentication by default. Add the following configuration to environment variable.
+
+```ruby
+ENV["VUE_DELAYED_JOB_USERNAME"] = "username"
+ENV["VUE_DELAYED_JOB_PASSWORD"] = "password"
+```
+
 ## TODO
 
 - Add unit tests
 - Add pagination
 - Stats
-- Add authentication
+- Add authentication [DONE]
 
 ## Development
 
