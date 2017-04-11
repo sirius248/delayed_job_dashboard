@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="block">
+      <el-pagination
+        layout="total, sizes, prev, pager, next"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-sizes="pageSizes"
+        :page-size="perPage"
+        :total="totalJobs">
+      </el-pagination>
+    </div>
+
     <el-table
       :data="jobs"
       v-loading.body="loading"
@@ -52,6 +63,17 @@
       </el-table-column>
     </el-table>
 
+    <div class="block">
+      <el-pagination
+        layout="total, sizes, prev, pager, next"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-sizes="pageSizes"
+        :page-size="perPage"
+        :total="totalJobs">
+      </el-pagination>
+    </div>
+
     <el-dialog title="Object Payload" v-model="dialogVisible" size="small">
       <pre>{{jobDetailHandler}}</pre>
       <span slot="footer" class="dialog-footer">
@@ -65,34 +87,75 @@
   const moment = require('moment');
 
   export default {
-    props: ["mydata"],
     data () {
       return {
         jobs: [],
         dialogVisible: false,
         jobDetailHandler: "",
         jobDetailId: "",
-        loading: true
-
+        loading: true,
+        currentPage: 0,
+        perPage: 4,
+        totalJobs: 0,
+        totalPages: 0,
+        pageSizes: [4, 6, 8, 10]
       }
     },
+
     created () {
-      let path = window.location.pathname;
-      if (path.includes("pending")) {
-        this.loadJobs({ params: { filter: "pending" } });
-      } else if (path.includes("failed")) {
-        this.loadJobs({ params: { filter: "failed" } });
-      } else if (path.includes("working")) {
-        this.loadJobs({ params: { filter: "working" } });
-      } else if (path.includes("enqueued")) {
-        this.loadJobs({ params: { filter: "enqueued" } });
-      }
-      else {
-        this.loadJobs({ params: {} });
-      }
+      this.loadPageInfo();
+      this.loadJobsForCurrentPage();
     },
 
     methods: {
+      getJobType() {
+        const path = window.location.pathname;
+        if (path.includes("pending")) {
+          return "pending"
+        } else if (path.includes("failed")) {
+          return "failed"
+        } else if (path.includes("working")) {
+          return "working"
+        } else if (path.includes("enqueued")) {
+          return "enqueued"
+        }
+        else {
+          return ""
+        }
+      },
+
+      loadJobsForCurrentPage() {
+        const filter = this.getJobType();
+        this.loadJobs({
+          params: {
+            filter: filter,
+            page: this.currentPage,
+            per_page: this.perPage
+          }
+        });
+      },
+
+      loadPageInfo(){
+        const queries = { params: { filter: this.getJobType(), r_page: this.perPage } };
+        this.$http.get("/delayed_job/jobs_info.json", queries).then(response => {
+          const res = response.body;
+          this.totalPages = res.total_pages;
+          this.totalJobs = res.total_jobs;
+        }, response => {
+        });
+      },
+
+      handleSizeChange(val){
+        this.perPage = val;
+        this.loadPageInfo();
+        this.loadJobsForCurrentPage();
+      },
+
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.loadJobsForCurrentPage();
+      },
+
       handleClickDialog(index, jobs){
         this.jobDetailHandler = jobs[index].payload_object;
         this.jobDetailId = jobs[index].id;

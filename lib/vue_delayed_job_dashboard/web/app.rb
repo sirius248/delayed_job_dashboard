@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'vue_delayed_job_dashboard/web/filter'
 
 module VueDelayedJobDashboard
   class WebApplication < Sinatra::Base
@@ -36,21 +37,21 @@ module VueDelayedJobDashboard
       haml :working, escape_html: false
     end
 
+    get '/jobs_info.json' do
+      content_type :json
+      total = VueDelayedJobDashboard::Filter.for(Delayed::Job, params[:filter]).page(0).per(params[:per_page]).total_pages
+
+      {
+        total_jobs: VueDelayedJobDashboard::Filter.for(Delayed::Job, params[:filter]).count,
+        total_pages: total
+      }.to_json
+    end
+
     get '/jobs.json' do
       content_type :json
 
-      case params["filter"]
-      when "pending"
-        @jobs = Delayed::Job.where(locked_at: nil, attempts: 0).order(created_at: :desc)
-      when "failed"
-        @jobs = Delayed::Job.where.not(failed_at: nil).order(created_at: :desc)
-      when "working"
-        @jobs = Delayed::Job.where.not(locked_at: nil).order(created_at: :desc)
-      when "enqueued"
-        @jobs = Delayed::Job.order(created_at: :desc)
-      end
-
-      @jobs = Delayed::Job.order(created_at: :desc) if @jobs.nil?
+      @jobs = Delayed::Job.page(params[:page]).per(params[:per_page]).order(created_at: :desc)
+      @jobs = VueDelayedJobDashboard::Filter.for(@jobs, params[:filter])
 
       @jobs_json = @jobs.as_json
       @jobs_json.each_with_index do |job, index|
