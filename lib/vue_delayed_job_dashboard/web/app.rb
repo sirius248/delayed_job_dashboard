@@ -1,3 +1,4 @@
+require 'rack'
 require 'sinatra/base'
 require 'vue_delayed_job_dashboard/web/filter'
 

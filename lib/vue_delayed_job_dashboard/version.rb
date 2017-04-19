@@ -1,3 +1,3 @@
 module VueDelayedJobDashboard
-  VERSION = "0.1.5"
+  VERSION = "0.2.2"
 end
